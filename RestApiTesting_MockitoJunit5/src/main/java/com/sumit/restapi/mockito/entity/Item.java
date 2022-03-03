@@ -19,13 +19,21 @@ public class Item {
 	public Item() {
 		
 	}
+	public Item(int id, String name, int price, int quantity,int value) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.value=value;
+		
+	}
 	public Item(int id, String name, int price, int quantity) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		
 	}
 	
 	

@@ -5,6 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +44,31 @@ public class ItemControllerTest {
 	@Test
 	public void get_Item() throws Exception
 	{
-		
+		//Mocking out the service layer dependency
 		when(service.getItem()).thenReturn(new Item(100,"Item1",10,20));
 		mockmvc.perform(get("/get_item"))
 				.andExpect(status().is(200))
 				.andExpect(content().json("\r\n"
 						+ "{\'id\':100,\'name\':\'Item1\',\'price\':10,\'quantity\':20}"));
+		
+	}
+	
+	@Test
+	public void getItemsFromDatabase() throws Exception
+	{
+		List<Item> obj=new ArrayList<>();
+		obj.add(new Item(100,"Item1",10,20,200));
+		obj.add(new Item(102,"Item2",5,10,50));
+		obj.add(new Item(103,"Item3",15,2,30));
+		
+		//Mocking out the service layer dependency
+		when(service.getItems()).thenReturn(obj);
+		mockmvc.perform(get("/get_items"))
+				.andExpect(status().is(200))
+				.andExpect(content().json("\r\n"
+						+ "[{\"id\":100,\"name\":\"Item1\",\"price\":10,\"quantity\":20,\"value\":200},{\"id\":102,\"name\":\"Item2\",\"price\":5,\"quantity\":10,\"value\":50},{\"id\":103,\"name\":\"Item3\",\"price\":15,\"quantity\":2,\"value\":30}]"));
+		
+		
 		
 	}
 	

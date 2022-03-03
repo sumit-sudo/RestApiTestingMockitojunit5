@@ -6,5 +6,6 @@ import com.sumit.restapi.mockito.entity.Item;
 public interface ItemServiceInterface {
 
 	public Item getItem();
+	public List<Item> getItems();
 	
 }
