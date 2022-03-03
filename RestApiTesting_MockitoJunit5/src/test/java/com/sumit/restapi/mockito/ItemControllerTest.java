@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,11 +20,18 @@ import com.sumit.restapi.mockito.controller.ItemController;
 import com.sumit.restapi.mockito.entity.Item;
 import com.sumit.restapi.mockito.service.ItemServiceInterface;
 
-//@SpringBootTest(classes= {ItemController.class})
+//@SpringBootTest(classes= {ItemControllerTest.class})
 
 @WebMvcTest(ItemController.class)
 public class ItemControllerTest {
 
+	
+	/*
+	 * @MockBean is a Spring Based Annotation. When you want to inject 
+	 * 	a mock into the Spring Context, we use @MockBean.
+	 * @Mock and @InjectMocks are for unit tests using pure Mockito. No Spring Context.
+	 * 
+	 */
 	@InjectMocks
 	ItemController controller;
 	
