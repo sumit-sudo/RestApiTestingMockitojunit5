@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 
@@ -16,14 +18,23 @@ import com.sumit.restapi.mockito.Dao.ItemDaoRepo;
 import com.sumit.restapi.mockito.entity.Item;
 import com.sumit.restapi.mockito.service.ItemService;
 
-//@SpringBootTest(classes= {ItemService.class})
-
+@SpringBootTest(classes= {ItemServiceTest.class})
+//@ExtendWith(MockitoExtension.class)
 public class ItemServiceTest {
 
 	@InjectMocks
 	ItemService service;
-	@MockBean
+	//Mocking out dependency, So here we won't call method of service layer instead we
+	// will return expected data manually using when().
+	@Mock
 	ItemDaoRepo repo;
+	
+	/*
+	 * When testing the controller, we are launching the entire spring context.
+	 *  We pickup a bean from the spring context using @MockBean.
+		When testing the business service, we DO NOT launch a spring context.
+ 		We write a simple mockito test.
+	 */
 	
 	@Test
 	public void getItemTest()
