@@ -1,5 +1,7 @@
 package com.sumit.restapi.mockito.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,13 @@ public class ItemController {
 	public Item getSingleItem()
 	{
 		return service.getItem();
+	}
+	
+	@GetMapping("/get_items")
+	public List<Item> getItemsFromDatabase()
+	{
+		
+		return service.getItems();
 	}
 	
 	
